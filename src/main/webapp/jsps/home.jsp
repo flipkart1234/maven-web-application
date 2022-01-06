@@ -9,7 +9,7 @@
 </head>
 </head>
 <body>
-<h1 align="center">Welcome to Ericsson. Bengaluru,Karnataka </h1>
+<h1 align="center">Welcome to Ericsson. Kodathi,Bengaluru,Karnataka </h1>
 <h1 align="center"> Ericsson - IDUN Project</h1>
 <hr>
 <br>
