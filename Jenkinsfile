@@ -1,19 +1,14 @@
 node{
- 
- properties([
-    buildDiscarder(logRotator(numToKeepStr: '3')),
-    pipelineTriggers([
-        pollSCM('* * * * *')
-    ])
-])
-
- def mavenHome = tool name: 'mvn_home', type: 'maven'
+ def maven = tool name: 'maven', type: 'maven'
  
  stage('CheckoutCode') {
- git branch: 'master', credentialsId: '9ca9e08b-fc06-4630-ba0e-253718721658', url: 'https:https://github.com/flipkart1234/maven-web-application.git'
- }  
-  
-  stage('Build') {
-    sh "${mvn_home}/bin/mvn clean package"
-  }
+     git credentialsId: 'github', url: 'https://github.com/flipkart1234/maven-web-application.git'
+ }
+ stage('generate artifact using maven build tool'){
+   sh "${maven}/bin/mvn install"
+ }
+ stage('upload artifact'){
+     nexusPublisher nexusInstanceId: 'nexus', nexusRepositoryId: 'quatric-snapshot', packages: []
+     sh "${maven}/bin/mvn deploy"
+ }
 }
